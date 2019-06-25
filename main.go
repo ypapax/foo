@@ -1,16 +1,16 @@
 package main
 
 import (
-	colorable "github.com/mattn/go-colorable"
-	"github.com/sirupsen/logrus"
+	"gopkg.in/cheggaaa/pb.v1"
+	"time"
 )
 
 func main() {
-	logrus.SetFormatter(&logrus.TextFormatter{ForceColors: true})
-	logrus.SetOutput(colorable.NewColorableStdout())
-
-	logrus.Info("succeeded")
-	logrus.Warn("not correct")
-	logrus.Error("something error")
-	logrus.Fatal("panic")
+	count := 100000
+	bar := pb.StartNew(count)
+	for i := 0; i < count; i++ {
+		bar.Increment()
+		time.Sleep(time.Millisecond)
+	}
+	bar.FinishPrint("The End!")
 }
